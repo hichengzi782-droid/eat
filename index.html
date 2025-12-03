@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What to Eat Today?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              heading: ['Fredoka', 'sans-serif'],
+              body: ['Nunito', 'sans-serif'],
+            },
+            colors: {
+              brand: {
+                yellow: '#FFD93D',
+                red: '#FF6B6B',
+                teal: '#4ECDC4',
+                dark: '#292F36',
+                light: '#F7FFF7'
+              }
+            },
+            animation: {
+              'bounce-slow': 'bounce 3s infinite',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Nunito', sans-serif;
+        background-color: #F7FFF7;
+      }
+      h1, h2, h3, button {
+        font-family: 'Fredoka', sans-serif;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

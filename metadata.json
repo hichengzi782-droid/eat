@@ -1,0 +1,5 @@
+{
+  "name": "Food Decision Wheel",
+  "description": "An interactive spinning wheel to decide what to eat today, featuring AI-powered suggestions.",
+  "requestFramePermissions": []
+}
