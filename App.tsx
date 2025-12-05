@@ -2,28 +2,28 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import Wheel from './components/Wheel';
 import { WheelItem, GeminiStatus } from './types';
 import { generateFoodIdeas, getCheekyComment } from './services/geminiService';
-import { Check, Trash2, Plus, Sparkles, AlertCircle, Utensils, RefreshCw, PartyPopper } from 'lucide-react';
+import { Check, Trash2, Plus, Sparkles, AlertCircle, Utensils, RefreshCw, PartyPopper, Coffee } from 'lucide-react';
 
 // Preset colors to cycle through
 const COLORS = [
-  '#FF6B6B', // Red
-  '#4ECDC4', // Teal
-  '#FFD93D', // Yellow
-  '#95A5A6', // Gray
-  '#FF8C42', // Orange
-  '#6A0572', // Purple
-  '#AB83A1', // Pinkish
-  '#2C3E50', // Dark Blue
-  '#2ECC71', // Emerald Green
-  '#E67E22', // Carrot Orange
-  '#9B59B6', // Amethyst
-  '#1ABC9C', // Green Sea
+  '#FF9AA2', // Melon
+  '#FFB7B2', // Salmon
+  '#FFDAC1', // Peach
+  '#E2F0CB', // Dirty White/Green
+  '#B5EAD7', // Magic Mint
+  '#C7CEEA', // Periwinkle
+  '#F6EAC2', // Tea Green
+  '#FF9EAA', // Pink
+  '#A0E7E5', // Tiffany Blue
+  '#FFD3E0', // Light Pink
+  '#D4F0F0', // Light Blue
+  '#FBC7F3', // Light Purple
 ];
 
 const DEFAULT_ITEMS = [
-  "🥘 麻辣烫", "🍔 汉堡包", "🍣 寿司", "🥗 轻食沙拉", 
-  "🍛 咖喱饭", "🍜 拉面", "🍕 披萨", "🍗 炸鸡", 
-  "🥟 饺子", "🍱 鳗鱼饭", "🍝 意大利面", "🍲 小火锅"
+  "🧋 珍珠奶茶", "🍰 草莓蛋糕", "🧁 纸杯蛋糕", "🧇 现烤华夫", 
+  "🥐 牛角面包", "🍮 焦糖布丁", "🍦 冰淇淋", "🍪 曲奇饼干", 
+  "🍡 糯米糍", "🥯 贝果三明治", "🥤 冰柠檬茶", "🍟 薯条炸鸡"
 ];
 
 const App: React.FC = () => {
@@ -118,7 +118,7 @@ const App: React.FC = () => {
   const handleGenerateIdeas = async () => {
     setAiStatus(GeminiStatus.LOADING);
     try {
-      const ideas = await generateFoodIdeas("午餐/晚餐");
+      const ideas = await generateFoodIdeas("下午茶");
       const newItems = ideas.map((text, i) => ({
         id: crypto.randomUUID(),
         text,
@@ -132,17 +132,17 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFBE6] text-brand-dark flex flex-col items-center pb-20 overflow-x-hidden">
+    <div className="min-h-screen bg-[#FFF0F5] text-brand-dark flex flex-col items-center pb-20 overflow-x-hidden">
       
       {/* Header */}
-      <header className="w-full bg-brand-yellow text-brand-dark p-6 text-center shadow-lg relative overflow-hidden rounded-b-[40px] border-b-4 border-orange-200">
-        <div className="absolute top-0 left-0 w-full h-full opacity-20 bg-[url('https://www.transparenttextures.com/patterns/food.png')]"></div>
+      <header className="w-full bg-[#FFD1DC] text-brand-dark p-6 text-center shadow-lg relative overflow-hidden rounded-b-[40px] border-b-4 border-white/50">
+        <div className="absolute top-0 left-0 w-full h-full opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         <div className="relative z-10 flex flex-col items-center">
-           <div className="bg-white/80 p-3 rounded-full mb-2 shadow-sm">
-             <Utensils className="text-brand-red w-8 h-8" />
+           <div className="bg-white/80 p-3 rounded-full mb-2 shadow-sm animate-bounce-slow">
+             <Coffee className="text-[#FF6B6B] w-8 h-8" />
            </div>
-           <h1 className="text-3xl font-heading font-black tracking-wide text-brand-dark drop-shadow-sm">今天吃什么呀?</h1>
-           <p className="text-sm font-body font-bold text-gray-700 mt-1">✨ 让命运来决定你的胃 ✨</p>
+           <h1 className="text-3xl font-heading font-black tracking-wide text-gray-800 drop-shadow-sm">下午茶吃什么?</h1>
+           <p className="text-sm font-body font-bold text-gray-600 mt-1">✨ 甜蜜时刻，快乐加倍 ✨</p>
         </div>
       </header>
 
@@ -159,10 +159,10 @@ const App: React.FC = () => {
           />
           {/* Cute mascot or decoration near wheel */}
           <div className="absolute -bottom-4 -right-2 text-4xl animate-bounce-slow z-10 select-none">
-            😋
+            🍰
           </div>
           <div className="absolute -top-2 -left-2 text-4xl animate-bounce-slow z-10 select-none" style={{animationDelay: '1.5s'}}>
-            🍩
+            🧸
           </div>
         </div>
 
@@ -171,33 +171,33 @@ const App: React.FC = () => {
           onClick={handleSpin}
           disabled={isSpinning || items.length < 2}
           className={`
-            mt-8 px-10 py-4 rounded-full text-xl font-black tracking-wider shadow-[0_6px_0_rgba(0,0,0,0.2)] transition-all active:shadow-none active:translate-y-1.5 border-4 border-white
+            mt-8 px-10 py-4 rounded-full text-xl font-black tracking-wider shadow-[0_6px_0_rgba(0,0,0,0.1)] transition-all active:shadow-none active:translate-y-1.5 border-4 border-white
             ${isSpinning || items.length < 2 
               ? 'bg-gray-300 text-gray-500 cursor-not-allowed shadow-none translate-y-1' 
-              : 'bg-brand-red text-white hover:bg-red-400'
+              : 'bg-[#FF9EAA] text-white hover:bg-[#FF8696]'
             }
           `}
         >
-          {isSpinning ? '转转转...😵‍💫' : '帮我选一个! 🎲'}
+          {isSpinning ? '选甜点中...🤩' : '帮我选一个! 🎲'}
         </button>
 
         {/* Controls Section */}
-        <div className="w-full mt-10 bg-white p-6 rounded-3xl shadow-xl border-2 border-brand-teal/20">
+        <div className="w-full mt-10 bg-white p-6 rounded-3xl shadow-xl border-2 border-[#FFD1DC]">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-bold font-heading text-brand-dark flex items-center gap-2">
-              <span>📜</span> 菜单列表 ({items.length})
+            <h2 className="text-lg font-bold font-heading text-gray-700 flex items-center gap-2">
+              <span>🍩</span> 菜单列表 ({items.length})
             </h2>
             <button 
               onClick={handleGenerateIdeas}
               disabled={aiStatus === GeminiStatus.LOADING}
-              className="text-xs flex items-center gap-1 bg-brand-light text-brand-teal font-bold border-2 border-brand-teal px-3 py-1.5 rounded-xl hover:bg-brand-teal hover:text-white transition-all active:scale-95"
+              className="text-xs flex items-center gap-1 bg-[#FDF2F8] text-[#DB2777] font-bold border-2 border-[#FBCFE8] px-3 py-1.5 rounded-xl hover:bg-[#FBCFE8] transition-all active:scale-95"
             >
               {aiStatus === GeminiStatus.LOADING ? (
                  <RefreshCw size={14} className="animate-spin" />
               ) : (
                 <Sparkles size={14} />
               )}
-              AI 帮我想想
+              AI 推荐甜点
             </button>
           </div>
 
@@ -208,12 +208,12 @@ const App: React.FC = () => {
               value={newItemText}
               onChange={(e) => setNewItemText(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && addItem()}
-              placeholder="加点好吃的... (比如: 🍦 冰淇淋)"
-              className="flex-1 bg-gray-50 border-2 border-gray-200 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent transition-all"
+              placeholder="加点好吃的... (比如: 🍮 提拉米苏)"
+              className="flex-1 bg-pink-50 border-2 border-pink-100 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#FF9EAA] focus:border-transparent transition-all placeholder-pink-300"
             />
             <button 
               onClick={addItem}
-              className="bg-brand-teal text-white p-3 rounded-xl hover:bg-teal-500 transition-colors shadow-sm"
+              className="bg-[#A0E7E5] text-white p-3 rounded-xl hover:bg-[#8CDAD8] transition-colors shadow-sm"
             >
               <Plus size={24} />
             </button>
@@ -223,20 +223,20 @@ const App: React.FC = () => {
           <div className="max-h-48 overflow-y-auto space-y-2 pr-1 custom-scrollbar">
             {items.length === 0 && (
               <div className="text-center text-gray-400 py-6 flex flex-col items-center bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
-                <AlertCircle size={32} className="mb-2 opacity-50 text-brand-yellow"/>
+                <AlertCircle size={32} className="mb-2 opacity-50 text-[#FF9EAA]"/>
                 <p className="font-bold">空空如也哦~</p>
-                <p className="text-xs mt-1">快加点好吃的，或者问问 AI 吧！</p>
+                <p className="text-xs mt-1">快加点甜点，或者问问 AI 吧！</p>
               </div>
             )}
             {items.map((item) => (
-              <div key={item.id} className="group flex items-center justify-between bg-white hover:bg-gray-50 p-3 rounded-2xl border-2 border-gray-100 transition-colors">
+              <div key={item.id} className="group flex items-center justify-between bg-white hover:bg-pink-50 p-3 rounded-2xl border-2 border-gray-100 hover:border-pink-200 transition-colors">
                 <div className="flex items-center gap-3">
                   <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
                   <span className="font-bold text-gray-700">{item.text}</span>
                 </div>
                 <button 
                   onClick={() => removeItem(item.id)}
-                  className="text-gray-300 hover:text-brand-red transition-colors p-1"
+                  className="text-gray-300 hover:text-[#FF6B6B] transition-colors p-1"
                 >
                   <Trash2 size={16} />
                 </button>
@@ -249,44 +249,44 @@ const App: React.FC = () => {
       {/* Winner Modal */}
       {winner && !isSpinning && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
-          <div className="bg-white rounded-[2rem] p-8 max-w-sm w-full text-center shadow-2xl transform animate-in zoom-in-95 duration-300 relative overflow-hidden border-4 border-brand-yellow">
+          <div className="bg-white rounded-[2rem] p-8 max-w-sm w-full text-center shadow-2xl transform animate-in zoom-in-95 duration-300 relative overflow-hidden border-4 border-[#FFDAC1]">
              {/* Confetti-ish background decoration */}
              <div className="absolute top-0 left-0 w-full h-4 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iMiIgZmlsbD0iI0ZGRDkzRCIgb3BhY2l0eT0iMC41Ii8+PC9zdmc+')] opacity-50"></div>
              
              <div className="mb-6 flex justify-center relative">
                <div className="absolute -top-4 -right-4 text-4xl animate-bounce">✨</div>
-               <div className="absolute -bottom-2 -left-4 text-4xl animate-bounce" style={{animationDelay: '0.2s'}}>🎉</div>
-               <div className="w-24 h-24 rounded-full bg-brand-light border-4 border-brand-yellow flex items-center justify-center text-5xl shadow-inner animate-bounce-slow">
-                 {winner.text.match(/\p{Emoji}/u)?.[0] || '🍽️'}
+               <div className="absolute -bottom-2 -left-4 text-4xl animate-bounce" style={{animationDelay: '0.2s'}}>🍬</div>
+               <div className="w-24 h-24 rounded-full bg-[#FFF0F5] border-4 border-[#FFB7B2] flex items-center justify-center text-5xl shadow-inner animate-bounce-slow">
+                 {winner.text.match(/\p{Emoji}/u)?.[0] || '😋'}
                </div>
              </div>
              
-             <h3 className="text-brand-teal text-sm font-black tracking-widest mb-2 uppercase">今天的主角是</h3>
-             <h2 className="text-3xl font-heading font-black text-brand-dark mb-6 break-words leading-tight" style={{color: winner.color}}>
+             <h3 className="text-[#FF9EAA] text-sm font-black tracking-widest mb-2 uppercase">下午茶决定是</h3>
+             <h2 className="text-3xl font-heading font-black text-gray-800 mb-6 break-words leading-tight" style={{color: winner.color}}>
                {winner.text.replace(/\p{Emoji}/u, '').trim()}
              </h2>
 
              {winningComment ? (
                <div className="bg-yellow-50 text-yellow-800 p-4 rounded-2xl text-sm font-medium mb-6 border-2 border-yellow-100 relative text-left">
-                 <PartyPopper size={20} className="absolute -top-3 -right-2 text-brand-red fill-current" />
+                 <PartyPopper size={20} className="absolute -top-3 -right-2 text-[#FF6B6B] fill-current" />
                  “{winningComment}”
                </div>
              ) : isCommentLoading ? (
                 <div className="h-16 flex flex-col items-center justify-center mb-6 gap-2">
-                  <RefreshCw className="animate-spin text-brand-teal" size={24} />
-                  <span className="text-xs text-gray-400 font-bold">AI 大厨正在锐评中...</span>
+                  <RefreshCw className="animate-spin text-[#A0E7E5]" size={24} />
+                  <span className="text-xs text-gray-400 font-bold">AI 正在品尝中...</span>
                 </div>
              ) : null}
 
              <button 
                onClick={() => setWinner(null)}
-               className="w-full bg-brand-teal text-white py-3.5 rounded-xl font-bold text-lg hover:bg-teal-500 transition-colors shadow-lg shadow-teal-200"
+               className="w-full bg-[#A0E7E5] text-white py-3.5 rounded-xl font-bold text-lg hover:bg-[#8CDAD8] transition-colors shadow-lg shadow-teal-100/50"
              >
-               好耶！就吃这个！😍
+               好耶！我要吃这个！😍
              </button>
              <button 
                onClick={() => { setWinner(null); handleSpin(); }}
-               className="mt-4 text-sm font-bold text-gray-400 hover:text-brand-dark underline decoration-2 decoration-dotted underline-offset-4"
+               className="mt-4 text-sm font-bold text-gray-400 hover:text-gray-600 underline decoration-2 decoration-dotted underline-offset-4"
              >
                不满意？再转一次
              </button>
